@@ -36,14 +36,15 @@ export default class extends QQBot.plugin {
         describe: '更新'
       }
     ]);
-    const cqJson = join(process.cwd(), '/runtime/plugins/运行/重启.json');
-    if (existsSync(cqJson)) {
-      const { e, time } = JSON.parse(readFileSync(cqJson, 'utf-8'));
+
+    const data = this.cache.getCache('重启');
+    if (data) {
+      const { e, time } = data as Record<string, any>;
       this.send(e, {
         msg_id: e.msg.id,
         content: '重启成功, 耗时：' + this.dayjs().subtract(time).format('s') + 's'
       }).catch(err => err);
-      rmSync(cqJson);
+      this.cache.setCache('重启', null);
     }
   }
 
@@ -176,16 +177,17 @@ export default class extends QQBot.plugin {
       content: '开始执行重启，请稍等...'
     });
 
-    const data = JSON.stringify({
-      e: e,
-      time: +new Date()
-    });
-    const cqJson = join(process.cwd(), '/runtime/plugins/运行/重启.json');
-    mkdirSync(dirname(cqJson), { recursive: true });
-    writeFileSync(cqJson, data);
+    this.cache.setCache(
+      '重启',
+      {
+        e: e,
+        time: +new Date()
+      },
+      10 * 60 * 1000
+    );
     exec('npm run pm2:start && npm run pm2:save', { windowsHide: true }, async (error, stdout) => {
       if (error) {
-        rmSync(cqJson);
+        this.cache.setCache('重启', null);
         await this.send(e, {
           msg_id: e.msg.id,
           content: `操作失败！\n${error.stack}`

@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import schedule from 'node-schedule';
 
 const cacheDir = join(process.cwd(), '/runtime/cache');
 const maxage = 24 * 60 * 60 * 1000; // 最大缓存时间为24小时
@@ -88,7 +89,14 @@ function md5(str: string): string {
   return createHash('md5').update(str).digest('hex');
 }
 
-setInterval(clearCache, maxage);
+// 每天凌晨清理文件
+const scheduleRule = new schedule.RecurrenceRule();
+scheduleRule.tz = 'Asia/Shanghai';
+scheduleRule.hour = 0;
+scheduleRule.minute = 0;
+schedule.scheduleJob(scheduleRule, async function () {
+  clearCache();
+});
 
 loadCacheData();
 

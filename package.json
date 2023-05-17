@@ -1,0 +1,69 @@
+{
+  "name": "qq-bot",
+  "version": "1.0.8",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/kongxiangyiren/qq-bot.git",
+  "author": "空巷一人",
+  "description": "基于node的qq频道机器人",
+  "scripts": {
+    "dev": "nodemon ./src/app.ts",
+    "start": "ts-node ./src/app.ts",
+    "lint": "eslint . --ext .js,.ts --fix --ignore-path .gitignore",
+    "tsc": "tsc",
+    "build": "ts-node ./build.ts",
+    "pkg": "ts-node ./build.ts pkg",
+    "pm2:start": "pm2 startOrRestart pm2.yaml",
+    "pm2:save": "pm2 save --force",
+    "pm2:delete": "pm2 delete pm2.yaml",
+    "pm2:stop": "pm2 stop pm2.yaml",
+    "pm2:log": "pm2 logs --lines 400 QQBot",
+    "pm2:list": "pm2 list",
+    "pm2:monit": "pm2 monit"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dayjs": "^1.11.7",
+    "jimp": "^0.22.8",
+    "kolorist": "^1.8.0",
+    "lodash": "^4.17.21",
+    "node-schedule": "^2.1.1",
+    "nunjucks": "^3.2.4",
+    "prompts": "^2.4.2",
+    "puppeteer": "^20.2.0",
+    "qq-guild-bot": "^2.9.5",
+    "qrcode": "^1.5.3",
+    "yaml": "^2.2.2"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/lodash": "^4.14.194",
+    "@types/node": "^20.1.3",
+    "@types/node-schedule": "^2.1.0",
+    "@types/nunjucks": "^3.2.2",
+    "@types/progress": "^2.0.5",
+    "@types/prompts": "^2.4.4",
+    "@types/qrcode": "^1.5.0",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.5",
+    "@typescript-eslint/parser": "^5.59.5",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.22",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "qq-guild-bot"
+  ]
+}

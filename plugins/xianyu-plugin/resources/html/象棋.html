@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>国际象棋</title>
+  </head>
+  <body>
+    <div id="box">
+      <div id="help"></div>
+    </div>
+    <div style="text-align: center">Created by qq-bot & 象棋</div>
+
+    <script>
+      let box = document.getElementById('box');
+      let data_box = []; // 棋子数据
+
+      const img = {
+        red: {
+          車: 'img/r_c.png',
+          馬: 'img/r_m.png',
+          象: 'img/r_x.png',
+          士: 'img/r_s.png',
+          将: 'img/r_j.png',
+          炮: 'img/r_p.png',
+          兵: 'img/r_z.png'
+        },
+        black: {
+          車: 'img/b_c.png',
+          馬: 'img/b_m.png',
+          象: 'img/b_x.png',
+          士: 'img/b_s.png',
+          将: 'img/b_j.png',
+          炮: 'img/b_p.png',
+          兵: 'img/b_z.png'
+        }
+      };
+
+      let map = '{{map}}'; // 地图
+      map = map.split(',');
+      let archive = '{{archive}}'; // 双方棋子标记
+      archive = archive.split(',');
+      let ss = '{{ss}}'; // 移动轨迹地图
+      ss = ss.split(',');
+
+      let ishelp = '{{ishelp}}'; // 帮助菜单
+      let isrollback = '{{isrollback}}';
+      if (ishelp === 'off') {
+        document.getElementById('help').innerHTML = '';
+
+        if (isrollback === 'on') {
+          document.getElementById('box').style.backgroundImage = "url('{{鸡鸡地址}}img/bg2.png')";
+        }
+
+        map.forEach((e, index) => {
+          if (e !== '空' && archive[index] == '黑') {
+            // 玩家A，黑棋
+            if (ss[index] == '黑box') {
+              data_box.push(`<div class="lattice" style="background-image: url('{{鸡鸡地址}}${img.black[e]}')"><div class="b latticebox"></div></div>`);
+            } else {
+              data_box.push(`<div class="lattice" style="background-image: url('{{鸡鸡地址}}${img.black[e]}')"></div>`);
+            }
+          }
+
+          if (e !== '空' && archive[index] == '红') {
+            // 玩家B，红棋
+            if (ss[index] == '红box') {
+              data_box.push(`<div class="lattice" style="background-image: url('{{鸡鸡地址}}${img.red[e]}')"><div class="r latticebox"></div></div>`);
+            } else {
+              data_box.push(`<div class="lattice" style="background-image: url('{{鸡鸡地址}}${img.red[e]}')"></div>`);
+            }
+          }
+          if (e === '空') {
+            if (ss[index] == '黑box') {
+              data_box.push(`<div class="lattice"><div class="b latticebox"></div></div>`);
+            } else if (ss[index] == '红box') {
+              data_box.push(`<div class="lattice"><div class="r latticebox"></div></div>`);
+            } else {
+              data_box.push(`<div class="lattice"></div>`);
+            }
+          }
+        });
+
+        box.innerHTML = data_box.join('');
+      }
+    </script>
+
+    <style>
+      body {
+        background-color: bisque;
+      }
+      #app {
+        display: flex;
+      }
+      #box {
+        display: flex;
+        height: 800px;
+
+        justify-content: center;
+        flex-wrap: wrap;
+        background-image: url('{{鸡鸡地址}}img/bg.png');
+        background-size: cover;
+        padding: 40px;
+        margin: 10px 0px;
+      }
+      .b {
+        background-image: url('{{鸡鸡地址}}img/b_box.png');
+      }
+      .r {
+        background-image: url('{{鸡鸡地址}}img/r_box.png');
+      }
+      .latticebox {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+      }
+      #box .lattice {
+        width: 73px;
+        height: 75px;
+        margin: 0rem 0.15rem;
+        background-size: cover;
+      }
+      th {
+        text-align: center;
+        background-color: #fddbb3;
+      }
+      th,
+      td,
+      th,
+      #help {
+        border: 2px solid #b58863;
+        border-left-color: #fff;
+        border-top-color: #fff;
+        text-align: left;
+        padding: 8px;
+      }
+    </style>
+  </body>
+</html>

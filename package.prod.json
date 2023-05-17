@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "pm2:start": "pm2 startOrRestart pm2.json",
+    "pm2:save": "pm2 save --force",
+    "pm2:delete": "pm2 delete pm2.json",
+    "pm2:stop": "pm2 stop pm2.json",
+    "pm2:log": "pm2 logs --lines 400 QQBot",
+    "pm2:list": "pm2 list",
+    "pm2:monit": "pm2 monit"
+  }
+}

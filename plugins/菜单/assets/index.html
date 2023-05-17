@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>菜单</title>
+  </head>
+
+  <body>
+    <div class="menu">
+      <div class="list">
+        {% for item,index in menu %}
+        <div class="one">
+          <div class="title">{{item}}</div>
+
+          <div class="command">
+            {% for item2 in menu[item] %}
+            <div class="m">
+              <span class="help-icon" style="background-position:{{((item2.icon - 1) % 10) * -50}}px {{(floor((item2.icon - 1) / 10) - 3) * -50}}px"></span>
+              <div class="m-t">{{item2.reg}}</div>
+              <div class="m-b">{{item2.desc}}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="copyright">
+        qq-bot
+        <span class="version">V{{version}}</span>
+        &#38;&#38; author<span class="author">@空巷一人</span>
+      </div>
+    </div>
+
+    <style>
+      body {
+        margin: 0;
+      }
+      @font-face {
+        font-family: 'xianyu';
+        src: url('{{global}}font/SourceHanSansCN-Normal.ttf');
+      }
+      .menu {
+        font-family: 'xianyu';
+        width: 600px;
+        position: relative;
+        min-height: 300px;
+        background: url('{{path | safe}}/assets/bg.png');
+        background-size: 100% auto;
+      }
+      .list {
+        padding: 100px 0 30px;
+        background: url('{{path | safe}}/assets/main.png');
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+      }
+      .one {
+        width: 80%;
+        margin: 30px auto;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .title {
+        padding: 10px;
+        font-weight: bold;
+      }
+      .command {
+        display: flex;
+        flex-wrap: wrap;
+        background: rgba(255, 255, 255, 0.6);
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        overflow: hidden;
+      }
+
+      .m {
+        width: calc((100% / 2) - (1px * 2));
+        padding: 10px 0;
+        position: relative;
+        border-right: rgba(255, 255, 255, 0.5) 1px solid;
+        border-bottom: rgba(255, 255, 255, 0.5) 1px solid;
+      }
+      .m:nth-of-type(2n) {
+        border-right: none;
+      }
+
+      .m-t {
+        margin-left: 40px;
+        padding: 0 10px;
+        font-weight: 600;
+      }
+      .m-b {
+        margin-left: 40px;
+        padding: 0 10px;
+        font-size: 14px;
+      }
+      .copyright {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+
+        font-size: 16px;
+
+        text-shadow: 1px 1px 1px #000;
+      }
+
+      .version,
+      .author {
+        color: #d3bc8e;
+      }
+
+      .help-icon {
+        width: 40px;
+        height: 40px;
+        display: block;
+        position: absolute;
+        border-radius: 5px;
+        left: 6px;
+        top: 12px;
+        transform: scale(0.85);
+        background: url('{{path}}/assets/icon.png') 0 0 no-repeat;
+        background-size: 500px auto;
+      }
+    </style>
+  </body>
+</html>

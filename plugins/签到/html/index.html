@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>签到</title>
+  </head>
+
+  <body>
+    <div class="bj">
+      <div class="content">
+        <div class="user">
+          <img class="head" src="{{img}}"/>
+          <div class="name">{{name}}</div>
+        </div>
+        <div class="success">签到成功</div>
+      </div>
+      <div class="time">{{time}}</div>
+    </div>
+    <style>
+      @font-face {
+        font-family: 'SourceHanSansCN-Light';
+        src: url('{{path | safe}}/html/fonts/SourceHanSansCN-Normal.ttf');
+      }
+
+      html,
+      body {
+        margin: 0;
+        font-family: 'SourceHanSansCN-Light';
+      }
+
+      .bj {
+        width: 1000px;
+        height: 562px;
+        background-image: url('{{path| safe}}/html/assets/背景.jpeg');
+        background-size: contain;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .content {
+        transform: translate(0, -50px);
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .head {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+
+      .name {
+        font-size: 50px;
+        margin-left: 10px;
+      }
+
+      .success {
+        display: block;
+        font-size: 80px;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .time {
+        position: absolute;
+        bottom: 30px;
+        right: 40px;
+        font-size: 25px;
+      }
+    </style>
+  </body>
+
+</html>

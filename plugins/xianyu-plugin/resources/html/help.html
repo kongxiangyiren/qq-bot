@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>咸鱼插件</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="description" content="This is my website.">
+  <meta name="keywords" content="website, products, services">
+
+  <style>
+
+    @font-face {
+      font-family: 'xianyu';
+      src: url('{{global}}fonts/SourceHanSansCN-Normal.ttf')
+    }
+
+    .content{
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      background: url('{{鸡鸡地址}}html/img/background.png') no-repeat center center fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      margin: 0;
+      padding: 0;
+      font-family: 'xianyu', sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      text-align: center;
+    }
+
+    .neiron{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      text-align: center;
+    }
+    .box{
+      border: 2px solid rgba(255,239,191, 0.5);
+      border-radius: 10px;
+      background-color: rgba(255,239,191, 0.1);
+      backdrop-filter: blur(5px);
+      padding: 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 5px 5px 3px #FAE2B4, -5px -5px 3px #FAE2B4, 5px -5px 3px #FAE2B4, -5px 5px 3px #FAE2B4;
+    }
+
+    a {
+      background-color: white;
+      color: black;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      margin: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    a:active {
+      background-color: white;
+      color: white;
+    }
+
+    p{
+      font-size: 1.5em;
+    }
+
+    th{
+      text-align: center;
+      background-color: #fddbb3;
+    }
+    th, td, th, #help{
+      border: 2px solid #B58863;
+      border-left-color: #fff;
+      border-top-color: #fff;
+      text-align: left;
+      padding: 8px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="neiron">
+      <div class="content">
+        <h1>qq-bot 咸鱼插件</h1>
+        <p>qq-bot & xianyu-plugin</p>
+      </div>
+      <div class="box content">
+
+        <div class="content">
+          <h3>扫雷游戏</h3>
+          <table>
+            <tbody>
+              <tr>
+                <th>指令</th>
+                <th>说明</th>
+                <th>注意</th>
+                <th>示例指令</th>
+              </tr>
+              <tr>
+                <th>扫雷</td>
+                <td>开始游戏</td>
+                <td></td>
+                <td>扫雷</td>
+              </tr>
+              <tr>
+                <th>结束扫雷</td>
+                <td>结束游戏</td>
+                <td></td>
+                <td>结束扫雷</td>
+              </tr>
+              <tr>
+                <th>扫雷难度</td>
+                <td>使用指定难度开始游戏</td>
+                <td>数量多的时候字就小</td>
+                <td>扫雷难度(简单|普通|困难)</td>
+              </tr>
+              <tr>
+                <th>扫雷帮助</td>
+                <td></td>
+                <td></td>
+                <td>扫雷扫雷帮助</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="content">
+          <h3>国际象棋游戏</h3>
+          <table>
+            <tbody>
+              <tr>
+                <th>指令</th>
+                <th>说明</th>
+                <th>示例</th>
+              </tr>
+              <tr>
+                <th>发起/加入国际象棋<br></td>
+                <td>发起游戏</td>
+                <td>发起国际象棋、加入国际象棋</td>
+              </tr>
+              <tr>
+                <th>加入国际象棋+黑/白<br></td>
+                <td>游戏中途加入队伍，加入队伍后可操作棋盘</td>
+                <td>加入国际象棋黑、加入国际象棋白</td>
+              </tr>
+              <tr>
+                <th>移动</td>
+                <td>移动棋子，移动+选择+目的地，示例中意思为将g4的棋子移动到e4的位置</td>
+                <td>移动g4e4</td>
+              </tr>
+              <tr>
+                <th>结束国际象棋</td>
+                <td>认输</td>
+                <td>结束国际象棋</td>
+              </tr>
+              <tr>
+                <th>国际象棋帮助</td>
+                <td></td>
+                <td>国际象棋帮助</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="content">
+          <h3>中国象棋游戏</h3>
+          <table>
+            <tbody>
+              <tr>
+                <th>指令</th>
+                <th>说明</th>
+                <th>示例</th>
+              </tr>
+              <tr>
+                <th>发起/加入中国象棋<br></td>
+                <td>发起游戏</td>
+                <td>发起中国象棋、加入中国象棋</td>
+              </tr>
+              <tr>
+                <th>加入中国象棋+黑/红<br></td>
+                <td>游戏中途加入队伍，加入队伍后可操作棋盘</td>
+                <td>加入中国象棋黑、加入中国象棋红</td>
+              </tr>
+              <tr>
+                <th>移子</td>
+                <td>移动棋子，移动+选择+目的地，示例中意思为将D4的兵移动到E4的位置，字母不区分大小写</td>
+                <td>移子D4E4</td>
+              </tr>
+              <tr>
+                <th>移子</td>
+                <td>移动棋子，棋子名称+列数+方向+步数，示例中意思为将D4的兵移动到E4的位置，需全中文，不区分大小写和简繁体，具体详情请百度</td>
+                <td>兵五进一</td>
+              </tr>
+              <tr>
+                <th>结束中国象棋</td>
+                <td>认输</td>
+                <td>结束中国象棋</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

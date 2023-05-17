@@ -1,0 +1,18 @@
+{
+  "bin": "./src/app.js",
+  "scripts": {
+    "pkg-build-win": "set PKG_CACHE_PATH=../.pkg-cache/&& pkg . --compress GZip",
+    "pkg-build": "export PKG_CACHE_PATH=../.pkg-cache/&& pkg . --compress GZip",
+    "postinstall": "patch-package"
+  },
+  "devDependencies": {
+    "pkg": "5.8.1",
+    "patch-package": "^7.0.0"
+  },
+  "pkg": {
+    "scripts": [],
+    "assets": ["./node_modules/axios/**/*"],
+    "targets": ["node16-win-x64", "node16-linux-x64", "node16-macos-x64"],
+    "outputPath": "dist"
+  }
+}

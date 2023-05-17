@@ -1,7 +1,5 @@
 import { exec, execSync } from 'child_process';
-import { existsSync, rmSync } from 'fs';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { readFileSync, writeFileSync } from 'node:fs';
 import os from 'os';
 import { join, parse } from 'path';
 let update = false;
@@ -84,6 +82,10 @@ export default class extends QQBot.plugin {
     const freeMem = (os.freemem() / (1024 * 1024 * 1024)).toFixed(2);
 
     msg += '\n内存大小：' + totalMem + 'GB\n 空闲内存：' + freeMem + 'GB';
+
+    // 程序占用内存
+    const used = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
+    msg += '\n程序占用内存：' + used + 'MB';
 
     // //cpu
     // const cpus = os.cpus();

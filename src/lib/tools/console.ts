@@ -2,7 +2,7 @@ import { green, red, yellow } from 'kolorist';
 import dayjs from './day';
 import { createWriteStream, mkdirSync } from 'node:fs';
 import { dirname, join, parse } from 'node:path';
-
+import './qqbot';
 if (process.env.NODE_ENV !== 'pm2') {
   // 修改console.log
   const cl = console.log;

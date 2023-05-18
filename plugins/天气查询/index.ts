@@ -66,17 +66,25 @@ export default class extends QQBot.plugin {
       }
 
       let weather_icon;
-      if (wea.data.forecast[0].type === '晴') {
-        const now = this.dayjs(); // 获取当前时间
-        const start = this.dayjs().hour(18).minute(0).second(0); // 晚上6点
-        const end = this.dayjs().add(1, 'day').hour(6).minute(0).second(0); // 第二天早上6点
+      const now = this.dayjs(); // 获取当前时间
+      const start = this.dayjs().hour(18).minute(0).second(0); // 晚上6点
+      const end = this.dayjs().add(1, 'day').hour(6).minute(0).second(0); // 第二天早上6点
 
+      if (wea.data.forecast[0].type === '晴') {
         if (now.isBetween(start, end)) {
           //   console.log('当前时间在晚上6点到早上6点之间');
           weather_icon = 'https://ghproxy.com/https://raw.githubusercontent.com/kongxiangyiren/305-wea-ico/master/天气/夜晴.png';
         } else {
           //   console.log('当前时间不在晚上6点到早上6点之间');
           weather_icon = 'https://ghproxy.com/https://raw.githubusercontent.com/kongxiangyiren/305-wea-ico/master/天气/日晴.png';
+        }
+      } else if (wea.data.forecast[0].type === '多云') {
+        if (now.isBetween(start, end)) {
+          //   console.log('当前时间在晚上6点到早上6点之间');
+          weather_icon = 'https://ghproxy.com/https://raw.githubusercontent.com/kongxiangyiren/305-wea-ico/master/天气/夜间多云.png';
+        } else {
+          //   console.log('当前时间不在晚上6点到早上6点之间');
+          weather_icon = 'https://ghproxy.com/https://raw.githubusercontent.com/kongxiangyiren/305-wea-ico/master/天气/日间多云.png';
         }
       } else {
         if (existsSync(join(__dirname, `./assets/天气/${wea.data.forecast[0].type}.png`))) {

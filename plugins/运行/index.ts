@@ -240,10 +240,11 @@ export default class extends QQBot.plugin {
       content: '开始' + type
     });
     let data;
+    update = true;
     try {
       data = execSync(type === '更新' ? 'git pull --no-rebase' : 'git fetch --all && git reset --hard origin/main', { encoding: 'utf-8' });
-      update = true;
     } catch (error) {
+      update = false;
       await this.send(e, {
         msg_id: e.msg.id,
         content: '更新失败' + error
@@ -265,7 +266,7 @@ export default class extends QQBot.plugin {
     } else {
       await this.send(e, {
         msg_id: e.msg.id,
-        content: '更新成功'
+        content: data
       });
     }
     update = false;

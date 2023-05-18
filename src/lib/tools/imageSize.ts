@@ -33,9 +33,10 @@ export default async function imageSize(imgPath: string, outPath: string): Promi
     if (currentSize > maxSize) {
       // 计算缩放比例
       const scaleFactor = Math.sqrt(maxSize / currentSize);
-
+      // 图片品质
+      image.quality(97);
       // 缩放图片
-      image.scale(Math.floor(scaleFactor * 10) / 10 - 0.1 <= 0 ? 0.1 : Math.floor(scaleFactor * 10) / 10 - 0.1);
+      image.scale(scaleFactor);
     }
 
     // 输出创建文件夹

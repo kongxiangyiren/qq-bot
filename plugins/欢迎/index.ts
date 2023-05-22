@@ -3,8 +3,7 @@ export default class extends QQBot.plugin {
   constructor() {
     super();
 
-    QQBot.ws.on(QQBot.AvailableIntentsEventsEnum.GUILD_MEMBERS, async (data: { eventType: 'GUILD_MEMBER_REMOVE' | 'GUILD_MEMBER_ADD'; msg: typeof QQBot.IMessage2 }) => {
-      //   console.log(data.eventType);
+    QQBot.ws.on(QQBot.AvailableIntentsEventsEnum.GUILD_MEMBERS, async (data: { eventId: string; eventType: 'GUILD_MEMBER_REMOVE' | 'GUILD_MEMBER_ADD'; msg: typeof QQBot.IMessage2 }) => {
       // 加入频道
       if (data.eventType === 'GUILD_MEMBER_ADD') {
         const { data: res } = await QQBot.client.channelApi.channels(data.msg.guild_id);
@@ -13,6 +12,7 @@ export default class extends QQBot.plugin {
         await this.examples({
           eventType: data.eventType,
           msg: {
+            id: data.eventType.replace(data.eventType + ':', ''),
             channel_id: channel.id,
             ...data.msg
           }
@@ -24,6 +24,7 @@ export default class extends QQBot.plugin {
         await this.examples2({
           eventType: data.eventType,
           msg: {
+            id: data.eventType.replace(data.eventType + ':', ''),
             channel_id: channel.id,
             ...data.msg
           }
@@ -36,6 +37,7 @@ export default class extends QQBot.plugin {
     // console.log(e.msg);
 
     const message = {
+      id: e.msg.id,
       content: `<@!${e.msg.user.id}> 欢迎新人!`,
       //   file_image: join(__dirname, './欢迎.jpeg') //本地上传
       image: 'http://tva1.sinaimg.cn/bmiddle/6af89bc8gw1f8ub7pm00oj202k022t8i.jpg'
@@ -46,6 +48,7 @@ export default class extends QQBot.plugin {
   }
   async examples2(e: { eventType: typeof QQBot.eventType; msg: typeof QQBot.IMessage2 }) {
     const message = {
+      id: e.msg.id,
       content: `${e.msg.user.id} ${e.msg.user.username} 离开了我们`
     };
     await this.send(e, message);

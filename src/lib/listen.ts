@@ -101,6 +101,34 @@ export default function listen(ws: WebsocketClient2) {
     }
   });
 
+  // 有人加入频道或退出频道
+  ws.on(AvailableIntentsEventsEnum.GUILD_MEMBERS, (e: { eventType: typeof QQBot.eventType; msg: typeof QQBot.IMessage2 }) => {
+    // console.log('[GUILD_MEMBERS] 事件接收 :', e);
+    if (e.eventType === 'GUILD_MEMBER_ADD') {
+      console.info(green(`[加入] :成员[${e.msg.user.id}][${e.msg.user.username}]已经加入频道[${e.msg.guild_id}]`));
+    } else if (e.eventType === 'GUILD_MEMBER_REMOVE') {
+      console.info(green(`[退出] :成员[${e.msg.user.id}][${e.msg.user.username}]已经退出频道[${e.msg.guild_id}]`));
+    } else {
+      console.info(green(`[成员资料变更] :成员[${e.msg.user.id}][${e.msg.user.username}]`));
+    }
+  });
+
+  // ws.on(AvailableIntentsEventsEnum.INTERACTION, (data: { msg: any }) => {
+  //   console.log('[INTERACTION] 事件接收 :', data);
+  // });
+
+  // ws.on(AvailableIntentsEventsEnum.MESSAGE_AUDIT, (data: { msg: any }) => {
+  //   console.log('[MESSAGE_AUDIT] 事件接收 :', data);
+  // });
+
+  // ws.on(AvailableIntentsEventsEnum.FORUMS_EVENT, (data: { msg: any }) => {
+  //   console.log('[FORUMS_EVENT] 事件接收 :', data);
+  // });
+
+  // ws.on(AvailableIntentsEventsEnum.AUDIO_ACTION, (data: { msg: any }) => {
+  //   console.log('[AUDIO_ACTION] 事件接收 :', data);
+  // });
+
   // [ERROR] 事件接收
   ws.on(SessionEvents.ERROR, data => {
     console.error('[ERROR] 事件接收 :', data);

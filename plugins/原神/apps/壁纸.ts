@@ -52,8 +52,8 @@ export default class extends QQBot.plugin {
 
     // 获取图片大小
     const contentLength = res.headers['content-length'];
-    // 图片超过500kb压缩成宽度500
-    if (contentLength / 1024 > 500) {
+    // 图片超过1mb压缩
+    if (contentLength / 1024 > 1024) {
       const out = await this.imageSize(imgPath, imgPath);
       if (!out) {
         return false;

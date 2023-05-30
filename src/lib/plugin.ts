@@ -108,9 +108,45 @@ export default class plugin {
     const personnel = ['GUILD_MEMBER_REMOVE', 'GUILD_MEMBER_ADD'];
     // 私信
     if (privateMessage.includes(e.eventType)) {
-      // 私信发不了图片
-      if ((msg.file_image ?? '') !== '') return false;
-      return QQBot.client.directMessageApi.postDirectMessage(e.msg.guild_id, msg);
+      if ((msg.file_image ?? '') !== '') {
+        let url = '';
+        //判断是不是沙箱环境
+        if (QQBot.client.config.sandbox) {
+          url = 'https://sandbox.api.sgroup.qq.com';
+        } else {
+          url = 'https://api.sgroup.qq.com';
+        }
+
+        // 判断图片是否存在
+        if (!existsSync(msg.file_image)) {
+          console.error(`${msg.file_image} 不存在`);
+          return { data: `${msg.file_image} 不存在` };
+        }
+
+        const picData = createReadStream(msg.file_image);
+        const formdata = new FormData();
+
+        for (const item in msg) {
+          if (item !== 'file_image') {
+            // @ts-ignore
+            formdata.append(item, msg[item]);
+          } else {
+            formdata.append('file_image', picData);
+          }
+        }
+
+        return this.axios({
+          method: 'post',
+          url: `${url}/dms/${e.msg.guild_id}/messages`,
+          headers: {
+            'Content-Type': formdata.getHeaders()['content-type'],
+            'Authorization': `Bot ${QQBot.client.config.appID}.${QQBot.client.config.token}`
+          },
+          data: formdata
+        });
+      } else {
+        return QQBot.client.directMessageApi.postDirectMessage(e.msg.guild_id, msg);
+      }
     }
     // 子频道消息
     else if (channel.includes(e.eventType) || personnel.includes(e.eventType)) {

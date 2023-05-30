@@ -16,11 +16,6 @@ export default class extends QQBot.plugin {
   }
 
   async index(e: { eventType: typeof QQBot.eventType; msg: typeof QQBot.IMessage2 }) {
-    // 私聊禁用
-    if (e.eventType === 'DIRECT_MESSAGE_CREATE') {
-      return;
-    }
-
     // 使用模板
     const res = this.nunjucks.render(join(__dirname, './assets/index.html'), {
       version: (await import(join(QQBot.ROOT_PATH, '/package.json'))).version,

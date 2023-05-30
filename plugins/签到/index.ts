@@ -15,10 +15,6 @@ export default class extends QQBot.plugin {
   }
 
   async index(e: { eventType: typeof QQBot.eventType; msg: typeof QQBot.IMessage2 }) {
-    // 私聊禁用
-    if (e.eventType === 'DIRECT_MESSAGE_CREATE') {
-      return;
-    }
     const qd = join(process.cwd(), '/data/plugins/签到/yaml/qiandao.yaml');
 
     let qdjson = existsSync(qd) ? this.yaml.parse(readFileSync(qd, 'utf-8')) : '';

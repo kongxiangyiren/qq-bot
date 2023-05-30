@@ -15,10 +15,6 @@ export default class extends QQBot.plugin {
   }
 
   async index(e: { eventType: typeof QQBot.eventType; msg: typeof QQBot.IMessage2 }) {
-    if (e.eventType !== 'DIRECT_MESSAGE_CREATE' && e.eventType !== 'MESSAGE_CREATE' && e.eventType !== 'AT_MESSAGE_CREATE') {
-      return;
-    }
-
     // arraybuffer 获取文件流 这里图片太大可能会很慢
     const res = await this.axios.get('https://api.dujin.org/pic/yuanshen/', { responseType: 'arraybuffer' }).catch(err => err);
 

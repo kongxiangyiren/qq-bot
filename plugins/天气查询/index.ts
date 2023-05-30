@@ -24,9 +24,6 @@ export default class extends QQBot.plugin {
   }
   // 参考文档 https://www.sojson.com/blog/305.html
   async index(e: { eventType: typeof QQBot.eventType; msg: typeof QQBot.IMessage2 }) {
-    if (e.eventType !== 'MESSAGE_CREATE' && e.eventType !== 'AT_MESSAGE_CREATE') {
-      return;
-    }
     const city = e.msg.content
       .replace(`<@!${QQBot.bot.id}>`, '')
       .replace('/查询天气', '')

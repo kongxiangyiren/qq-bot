@@ -56,6 +56,7 @@ export default class extends QQBot.plugin {
         });
         return true;
       }
+      console.log(`http://t.weather.itboy.net/api/weather/city/${cityData[0].city_code}`);
 
       const { data: wea } = await this.axios.get(`http://t.weather.itboy.net/api/weather/city/${cityData[0].city_code}`).catch(err => err);
       if (!wea || wea.status !== 200) {
@@ -97,9 +98,13 @@ export default class extends QQBot.plugin {
       const embedContent = createEmbedMessage(`${wea.cityInfo.city} ${wea.data.forecast[0].type}`, weather_icon, [
         `${wea.data.forecast[0].ymd} ${wea.data.forecast[0].week}`,
         `当前温度区间：${wea.data.forecast[0].high}/${wea.data.forecast[0].low}`,
-        `最高温度：${wea.data.forecast[0].high}`,
-        `最低温度：${wea.data.forecast[0].low}`,
-        `当前湿度：${wea.data.shidu}`
+        // `最高温度：${wea.data.forecast[0].high}`,
+        // `最低温度：${wea.data.forecast[0].low}`,
+        `当前湿度：${wea.data.shidu}`,
+        `日出：${wea.data.forecast[0].sunrise}`,
+        `日落：${wea.data.forecast[0].sunset}`,
+        `风向：${wea.data.forecast[0].fx}`,
+        `风力：${wea.data.forecast[0].fl}`
       ]);
       // 缓存10分钟
       this.cache.setCache(`wea:${cityData[0].city_code}`, JSON.stringify(embedContent), 10 * 60 * 1000); // 设置key的过期时间为10分钟

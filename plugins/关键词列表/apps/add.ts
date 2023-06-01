@@ -34,10 +34,10 @@ export default class extends QQBot.plugin {
     // 5	子频道管理员
     // 没有权限
     if (
-      !e.msg.member.roles.includes('4') ||
+      !e.msg.member.roles.includes('4') 
       // && !e.msg.member.roles.includes('5')
 
-      e.msg.author.id !== QQBot.config.master.id
+   &&   e.msg.author.id !== QQBot.config.master.id
     ) {
       const message = {
         content: `<@!${e.msg.author.id}> 无权限`,
